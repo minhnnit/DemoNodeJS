@@ -27,23 +27,23 @@ async function main() {
 			obj.Price = document.querySelectorAll('.total-line__price .order-summary__emphasis')[0].textContent.replace("$","");
 			obj.DiscountPrice = document.querySelector('.payment-due__price').textContent.replace("$","");
 			obj.TotalPrice = parseFloat(obj.Price) - parseFloat(obj.DiscountPrice);
-			//obj.TagDiscount = document.querySelector('.tag__text .reduction-code').textContent;
+			
+			obj.valid = 1;
+			if(document.querySelector('#error-for-reduction_code') !== null){
+				obj.valid = 0;
+			}
 			return obj;
 		  
       }).then(function(rs) {
 		  if(rs.TotalPrice > 0){
-			  console.log("Gia giam :" + rs.TotalPrice + " - " + c + " : Code apply successfully");
-		  } else {
-			  console.log("Gia giam :" + rs.TotalPrice + " - " + c + " : Invalid code");
+			  console.log(c + " : Code apply successfully" +"-"+ "Discount Amount :" + rs.TotalPrice);
+		  }
+		  else if(!rs.valid) {
+			 console.log( c + ": Invalid code"); 
 		  }
 		 
 	  });
-		
-		//results.push(CouponApply)
-		
 	}
-	
-	//console.log('got results $s', results.join('\n'))
 	
 	await nightmare.end()
 	
