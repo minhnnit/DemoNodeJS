@@ -1,0 +1,23 @@
+{
+  "name": "demonodejs",
+  "version": "1.0.0",
+  "description": "demo node js",
+  "main": "demoNodeJS.js",
+  "dependencies": {},
+  "devDependencies": {
+    "nightmare": "^3.0.2"
+  },
+  "scripts": {
+    "test": "node demoNodeJS.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/minhnnit/DemoNodeJS.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/minhnnit/DemoNodeJS/issues"
+  },
+  "homepage": "https://github.com/minhnnit/DemoNodeJS#readme"
+}
