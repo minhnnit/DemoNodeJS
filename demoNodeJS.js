@@ -3,7 +3,7 @@ const Nightmare = require('nightmare')
 main().catch(console.error)
 
 async function main() {
-	const nightmare = Nightmare({ show: false})
+	const nightmare = Nightmare({ show: true})
 	const CouponArr = [ 'CAINAYKHONGDUOC', 'CAINAYKHONGDUOCNOT', 'SPECIAL10', 'SPECIAL15' ]
 	const results = []
 	
