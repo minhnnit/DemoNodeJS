@@ -1,15 +1,22 @@
 const  Nightmare = require('nightmare')
 
-main().catch(console.error)
+async function typeCoupon(Coupon) {
+	await nightmare
+		.type('#coupon_code',Coupon);
+		.click('#main > div.cart-container.container.page-wrapper.page-checkout > div > form.checkout_coupon.woocommerce-form-coupon.has-border.is-dashed > div > div > div:nth-child(2) > button')
+		.wait(5000)
+		.evaluate(function(){
+			var obj = {};
+			obj.valid = 0;
+			if(document.querySelector('#main > div.cart-container.container.page-wrapper.page-checkout > div > div.woocommerce-message.message-wrapper > div') !== null){
+				obj.valid = 1
+			}
+			return obj;
+		});
+}
 
-async function main() {
-	const nightmare = Nightmare({ show: true})
-	const CouponArr = ['CAINAYKHONGDUOC','spend100get20']
-	
-	for(let i = 0; i < CouponArr.length; i++){
-		const c = CouponArr[i]
-	
-		const CouponApply = await nightmare
+async function gotoUrl(){
+	 await nightmare
 		.viewport(1366,768)
 		.goto('https://vape-smart.com/')
 		.click('#popmake-15498 > div.pum-content.popmake-content > div > div > div.pum-field.pum-field-button.pum-field-age_enter > button')
@@ -21,23 +28,17 @@ async function main() {
 		.click('#main > div.cart-container.container.page-wrapper.page-checkout > div > div.woocommerce.row.row-large.row-divided > div.cart-collaterals.large-5.col.pb-0 > div > div.cart_totals > div > a')
 		.wait(3000)
 		.click('#main > div.cart-container.container.page-wrapper.page-checkout > div > div.woocommerce-form-coupon-toggle > div > div > a')
-		.type('#coupon_code',c)
-		.click('#main > div.cart-container.container.page-wrapper.page-checkout > div > form.checkout_coupon.woocommerce-form-coupon.has-border.is-dashed > div > div > div:nth-child(2) > button')
-		.wait(5000)
-		.evaluate(function(){
-			var obj = {};
-			obj.valid = 0;
-			if(document.querySelector('#main > div.cart-container.container.page-wrapper.page-checkout > div > div.woocommerce-message.message-wrapper > div') !== null){
-				obj.valid = 1
-			}
-			return obj;
-		}).then(function(rs){
-			if (rs.valid) {
-				console.log(c + ' : Coupon apply successfully!')
-			} else{
-				console.log(c + ' : Invalid Coupon!')
-			}
-		});
-	}
-		await nightmare.end()
+	
 }
+
+async function main() {
+	const nightmare = Nightmare({ show: true})
+	const CouponArr = ['CAINAYKHONGDUOC','spend100get20']
+	console.log(123);
+	gotoUrl();
+		for(let couponCode of CouponArr ) {
+			typeCoupon(couponCode)
+		}
+}
+
+main();
