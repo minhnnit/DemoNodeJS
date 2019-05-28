@@ -5,7 +5,6 @@ main().catch(console.error)
 async function main() {
 	const nightmare = Nightmare({ show: true})
 	const CouponArr = [ 'CAINAYKHONGDUOC', 'CAINAYKHONGDUOCNOT', 'SPECIAL10', 'SPECIAL15' ]
-	const results = []
 	
 	for(let i = 0; i < CouponArr.length; i++){
 		const c = CouponArr[i]

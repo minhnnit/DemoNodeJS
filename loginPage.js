@@ -40,13 +40,14 @@ var getSheet = async () => {
 };
 async function getNick() {
 	let sheetdata = await getSheet();
-	//console.log(sheetdata);
+	console.log(sheetdata);
 	return {nick: sheetdata[0]['gs$cell']['$t'], pass: sheetdata[1]['gs$cell']['$t']};
 }
 
 async function loginName() {
 	var user = await getNick();
 	Nightmare({show: true})
+	.viewport(1366,768)
 	.goto('https://www.facebook.com')
 	.wait()
 	.type('#email', user.nick)
